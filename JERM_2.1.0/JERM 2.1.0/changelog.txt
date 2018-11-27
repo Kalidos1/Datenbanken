@@ -1,0 +1,45 @@
+ CHANGELOG FOR JERM
+===============================================================================
+===============================================================================
+
+===============================================================================
+  Version 2.1.0
+===============================================================================
+* Ported JERM to Java 1.5
+    * @Override Annotations removed because they were not valid for
+      implementations of interfaces in Java 1.5 but are valid in 1.6
+    * Porting of JTabbedPane
+      * It is not possible to set own components with setTabComponentAt()
+        for displaying of tabs so this functionality was removed.
+      * Instead ModelTab has been extended to implement the ModelListener
+        interface for displaying if the Model has unsaved changes by
+        displaying the tab text in a different color (red)
+      * Because of this, the close button has been removed from the tabs
+    * Porting of the actions
+      * Java 1.5 does not provide the following fields:
+        - Action.DISPLAYED_MNEMONIC_INDEX_KEY
+            This was used to set the mnemonic key to another char
+            than the first. In most actions the first char was used
+            though, so this is no real problem
+        - Action.LARGE_ICON_KEY
+            This sets a large icon for the Action. This was not used
+            either.
+        - Action.SELECTED_KEY
+            This field shows if the action is selected or not. This
+            was needed for the ToggleGridEnabledAction and 
+            ToggleGridMagneticAction to keep the state of the menuentries
+            synchronous with the state of the actual setting.
+            A workarround was provided to keep them both synced
+
+===============================================================================
+  Version 2.0.1
+===============================================================================
+* Fixed NullPointer Exceptions when clicking in empty canvas
+* Fixed deletion of Relationships
+    Edges of a Relationship where not removed, when the Relationship was 
+    recursive on one Entity
+
+===============================================================================
+  Version 2.0.0
+===============================================================================
+Initial Version of the 2.x series
