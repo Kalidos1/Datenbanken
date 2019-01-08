@@ -31,15 +31,15 @@ INSERT INTO Adresse VALUES (7,56756,'Madrid','Mustermannstrasse199');
 INSERT INTO Adresse VALUES (8,56756,'Madrid','Mustermannstrasse199');
 
 /*-----------------Ferienwohnung--------------*/
-INSERT INTO Ferienwohnung VALUES (0,'Ferienwohnung1',3,200,300,'Germany',0);
-INSERT INTO Ferienwohnung VALUES (1,'Ferienwohnung2',2,400,150,'Germany',1);
-INSERT INTO Ferienwohnung VALUES (2,'Ferienwohnung3',6,1000,500,'Spain',2);
-INSERT INTO Ferienwohnung VALUES (3,'Ferienwohnung4',5,600,400,'Spain',3);
-INSERT INTO Ferienwohnung VALUES (4,'Ferienwohnung5',3,700,200,'England',4);
-INSERT INTO Ferienwohnung VALUES (5,'Ferienwohnung6',1,300,100,'England',5);
-INSERT INTO Ferienwohnung VALUES (6,'Ferienwohnung7',4,400,400,'Spain',6);
-INSERT INTO Ferienwohnung VALUES (7,'Ferienwohnung8',7,800,700,'Spain',7);
-INSERT INTO Ferienwohnung VALUES (8,'Ferienwohnung9',7,800,700,'Spain',8);
+INSERT INTO Ferienwohnung VALUES (0,'Ferienwohnung0',3,200,300,'Germany',0);
+INSERT INTO Ferienwohnung VALUES (1,'Ferienwohnung1',2,400,150,'Germany',1);
+INSERT INTO Ferienwohnung VALUES (2,'Ferienwohnung2',6,1000,500,'Spain',2);
+INSERT INTO Ferienwohnung VALUES (3,'Ferienwohnung3',5,600,400,'Spain',3);
+INSERT INTO Ferienwohnung VALUES (4,'Ferienwohnung4',3,700,200,'England',4);
+INSERT INTO Ferienwohnung VALUES (5,'Ferienwohnung5',1,300,100,'England',5);
+INSERT INTO Ferienwohnung VALUES (6,'Ferienwohnung6',4,400,400,'Spain',6);
+INSERT INTO Ferienwohnung VALUES (7,'Ferienwohnung7',7,800,700,'Spain',7);
+INSERT INTO Ferienwohnung VALUES (8,'Ferienwohnung8',7,800,700,'Spain',8);
 
 /*-----------------Bild--------------------*/
 INSERT INTO Bild VALUES (0,2);
@@ -75,8 +75,10 @@ INSERT INTO Kunde VALUES ('max123@mustermann.de','Mustermann123','hallo123','SP7
 INSERT INTO Kunde VALUES ('max1@mustermann.de','Mustermann1','nicu123','EN63 1112','N','England',4);
 INSERT INTO Kunde VALUES ('max2@mustermann.de','Mustermann2','pw123','DE62 1121','Y','Germany',1);
 INSERT INTO Kunde VALUES ('max3@mustermann.de','Mustermann3','123456','EN68 1341','Y','England',5);
+INSERT INTO Kunde VALUES ('max31245323@mustermann.de','Mustermann12323','123456','EN68 1341','Y','England',6);
 
 /*-----------------Buchung--------------------*/
+
 INSERT INTO Buchung VALUES (0,TO_DATE('2019/12/10','yyyy/mm/dd'),TO_DATE('2019/12/10','yyyy/mm/dd'),
 TO_DATE('2019/12/17','yyyy/mm/dd'),4,TO_DATE('2019/12/17','yyyy/mm/dd'),0,2000,TO_DATE('2019/12/10','yyyy/mm/dd'),'max@mustermann.de',2);
 INSERT INTO Buchung VALUES (1,TO_DATE('2019/06/05','yyyy/mm/dd'),TO_DATE('2019/06/06','yyyy/mm/dd'),
@@ -97,9 +99,11 @@ INSERT INTO Buchung VALUES (8,TO_DATE('2018/11/02','yyyy/mm/dd'),TO_DATE('2018/1
 TO_DATE('2018/11/15','yyyy/mm/dd'),3,TO_DATE('2018/11/15','yyyy/mm/dd'),0,2000,TO_DATE('2018/11/20','yyyy/mm/dd'),'max123@mustermann.de',3);
 INSERT INTO Buchung VALUES (9,TO_DATE('2019/09/01','yyyy/mm/dd'),TO_DATE('2019/09/02','yyyy/mm/dd'),
 TO_DATE('2019/09/06','yyyy/mm/dd'),5,TO_DATE('2019/09/01','yyyy/mm/dd'),3,100,TO_DATE('2019/09/01','yyyy/mm/dd'),'max2@mustermann.de',7);
+
 /*-----------------Anzahlung--------------------*/
 INSERT INTO Anzahlung VALUES (0,TO_DATE('2019/12/10','yyyy/mm/dd'),300,0);
 INSERT INTO Anzahlung VALUES (1,TO_DATE('2019/06/05','yyyy/mm/dd'),500,1);
 INSERT INTO Anzahlung VALUES (2,TO_DATE('2019/10/15','yyyy/mm/dd'),200,2);
 INSERT INTO Anzahlung VALUES (3,TO_DATE('2019/09/01','yyyy/mm/dd'),100,3);
 INSERT INTO Anzahlung VALUES (4,TO_DATE('2019/04/20','yyyy/mm/dd'),700,4);
+INSERT INTO Anzahlung VALUES (5,TO_DATE('2019/12/10','yyyy/mm/dd'),1000,0);

@@ -85,7 +85,7 @@ SELECT AVG(b.buchung_sterne) as Sterne,FS.ferienwohnung
 FROM dbsys61.Buchung B,FerienwohnungSpanien FS RIGHT OUTER JOIN dbsys61.Ferienwohnung F
 ON f.fw_name = fs.ferienwohnung
 WHERE fs.ferienwohnung NOT IN (SELECT * FROM Buchungen VB) 
-AND b.fw_ID = f.fw_ID 
+AND b.fw_ID = f.fw_ID
 GROUP BY FS.ferienwohnung
 ORDER BY Sterne DESC;
 

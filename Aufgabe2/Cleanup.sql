@@ -9,7 +9,7 @@ drop table Kunde cascade constraints;
 drop table Adresse cascade constraints;
 drop table Anzahlung cascade constraints;
 drop table Buchung cascade constraints;
-
+drop table StornierteBuchung cascade constraints;
 
 /* Quasi "Papierkorb leehren" */
 purge recyclebin;
