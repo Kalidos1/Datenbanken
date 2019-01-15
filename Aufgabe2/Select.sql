@@ -5,6 +5,8 @@ rollback;
 
 /*-----------------Select 1-------------------------*/
 
+SELECT * FROM Land;
+
 SELECT COUNT(A.adresse_Ort) as Anzahl,A.adresse_Ort
 FROM dbsys61.Ferienwohnung F,dbsys61.Adresse A
 WHERE A.adresse_ID = F.adresse_ID
@@ -62,6 +64,8 @@ ORDER BY Anzahl DESC;
 DROP VIEW Buchung_Zahlung;
 
 /*-----------------Select 5-------------------------*/
+
+/* STERNE = 0 wenn nicht in Buchung aber Frei (Noch keine Bewertung)*/
 
 CREATE VIEW FerienwohnungSpanien(Ferienwohnung)
 AS SELECT f.fw_name

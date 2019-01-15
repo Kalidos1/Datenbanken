@@ -63,11 +63,9 @@ INSERT INTO hat VALUES ('Pool',7);
 INSERT INTO hat VALUES ('Kamin',2);
 INSERT INTO hat VALUES ('Kamin',4);
 INSERT INTO hat VALUES ('Sauna',6);
-INSERT INTO hat VALUES ('Sauna',3);
 INSERT INTO hat VALUES ('Kamin',3);
 INSERT INTO hat VALUES ('Sauna',7);
 INSERT INTO hat VALUES ('Sauna',2);
-INSERT INTO hat VALUES ('Sauna',8);
 
 /*-----------------Kunde--------------------*/
 INSERT INTO Kunde VALUES ('max@mustermann.de','Mustermann','max123','DE67 1111','Y','Germany',0);
@@ -99,7 +97,10 @@ INSERT INTO Buchung VALUES (8,TO_DATE('2018/11/02','yyyy/mm/dd'),TO_DATE('2018/1
 TO_DATE('2018/11/15','yyyy/mm/dd'),3,TO_DATE('2018/11/15','yyyy/mm/dd'),0,2000,TO_DATE('2018/11/20','yyyy/mm/dd'),'max123@mustermann.de',3);
 INSERT INTO Buchung VALUES (9,TO_DATE('2019/09/01','yyyy/mm/dd'),TO_DATE('2019/09/02','yyyy/mm/dd'),
 TO_DATE('2019/09/06','yyyy/mm/dd'),5,TO_DATE('2019/09/01','yyyy/mm/dd'),3,100,TO_DATE('2019/09/01','yyyy/mm/dd'),'max2@mustermann.de',7);
-
+INSERT INTO Buchung VALUES (10,TO_DATE('2019/12/10','yyyy/mm/dd'),TO_DATE('2019/12/10','yyyy/mm/dd'),
+TO_DATE('2019/12/17','yyyy/mm/dd'),4,TO_DATE('2019/12/17','yyyy/mm/dd'),0,2000,TO_DATE('2019/12/10','yyyy/mm/dd'),'max@mustermann.de',4);
+INSERT INTO Buchung VALUES (11,TO_DATE('2019/12/10','yyyy/mm/dd'),TO_DATE('2019/12/10','yyyy/mm/dd'),
+TO_DATE('2019/12/17','yyyy/mm/dd'),4,TO_DATE('2019/12/17','yyyy/mm/dd'),0,2000,TO_DATE('2019/12/10','yyyy/mm/dd'),'max@mustermann.de',8);
 /*-----------------Anzahlung--------------------*/
 INSERT INTO Anzahlung VALUES (0,TO_DATE('2019/12/10','yyyy/mm/dd'),300,0);
 INSERT INTO Anzahlung VALUES (1,TO_DATE('2019/06/05','yyyy/mm/dd'),500,1);
@@ -107,3 +108,6 @@ INSERT INTO Anzahlung VALUES (2,TO_DATE('2019/10/15','yyyy/mm/dd'),200,2);
 INSERT INTO Anzahlung VALUES (3,TO_DATE('2019/09/01','yyyy/mm/dd'),100,3);
 INSERT INTO Anzahlung VALUES (4,TO_DATE('2019/04/20','yyyy/mm/dd'),700,4);
 INSERT INTO Anzahlung VALUES (5,TO_DATE('2019/12/10','yyyy/mm/dd'),1000,0);
+
+commit;
+rollback;
