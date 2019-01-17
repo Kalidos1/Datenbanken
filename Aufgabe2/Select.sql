@@ -3,10 +3,9 @@
 commit;
 rollback;
 
+SELECT * From Buchung;
+
 /*-----------------Select 1-------------------------*/
-
-SELECT * FROM Land;
-
 SELECT COUNT(A.adresse_Ort) as Anzahl,A.adresse_Ort
 FROM dbsys61.Ferienwohnung F,dbsys61.Adresse A
 WHERE A.adresse_ID = F.adresse_ID
@@ -77,10 +76,10 @@ AND f.land_name = 'Spain';
 CREATE VIEW Buchungen(Ferienwohnung)
 AS SELECT f.fw_name
 FROM dbsys61.Ferienwohnung f,dbsys61.Buchung B,FerienwohnungSpanien FS
-WHERE b.buchung_Von > TO_DATE('11/01/2018', 'MM/DD/YYYY')
-AND b.buchung_Von < TO_DATE('11/21/2018', 'MM/DD/YYYY')
-AND b.buchung_Bis > TO_DATE('11/01/2018', 'MM/DD/YYYY')
-AND b.buchung_Bis < TO_DATE('11/21/2018', 'MM/DD/YYYY')
+WHERE b.buchung_Von >= TO_DATE('11/01/2018', 'MM/DD/YYYY')
+AND b.buchung_Von <= TO_DATE('11/21/2018', 'MM/DD/YYYY')
+AND b.buchung_Bis >= TO_DATE('11/01/2018', 'MM/DD/YYYY')
+AND b.buchung_Bis <= TO_DATE('11/21/2018', 'MM/DD/YYYY')
 AND f.fw_name = FS.ferienwohnung
 AND f.fw_ID = b.fw_ID;
 
@@ -98,3 +97,6 @@ SELECT * FROM Sterne;
 DROP VIEW FerienwohnungSpanien;
 DROP VIEW Buchungen;
 DROP VIEW Sterne;
+
+commit;
+rollback;

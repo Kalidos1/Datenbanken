@@ -1,4 +1,7 @@
 
+commit;
+rollback;
+
 /*-----------------Land--------------------*/
 INSERT INTO Land VALUES ('Germany');
 INSERT INTO Land VALUES ('Spain');

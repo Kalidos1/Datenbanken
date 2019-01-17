@@ -4,10 +4,10 @@ import java.sql.*;
 public class Teil4Aufgabe2 {
     public static void main(String args[]) {
 
-        String kundeEmail = "xy";
-        int ferienwohnungID = 0;
-        String anreisetermin = "11/01/2018"; // "11/01/2018"
-        String abreisetermin = "11/21/2018"; // "11/21/2018"
+        String kundeEmail = null; //max@mustermann.de
+        String ferienwohnungID = null; //0
+        String anreisetermin = null; // "11/01/2018"
+        String abreisetermin = null; // "11/21/2018"
         String name = "dbsys61";
         String passwd = "Schlagzeug1997";
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -16,8 +16,9 @@ public class Teil4Aufgabe2 {
         Statement stmt1 = null;
         Statement stmt2 = null;
         ResultSet rset = null;
+        ResultSet rset2 = null;
 
-       /* try {
+        try {
             System.out.println("KundenEmail: ");
             kundeEmail = in.readLine();
             System.out.println("FerienwohnungID:");
@@ -30,8 +31,11 @@ public class Teil4Aufgabe2 {
             System.out.println("Fehler beim Lesen der Eingabe: " + e);
             System.exit(-1);
         }
-*/
         System.out.println("");
+        if (kundeEmail == null || ferienwohnungID == null || anreisetermin == null || abreisetermin == null) {
+            System.out.println("Falsche Eingabe!!");
+            System.exit(-1);
+        }
 
         try {
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver()); 				// Treiber laden
@@ -49,15 +53,20 @@ public class Teil4Aufgabe2 {
             String mySelectQuery = "CREATE VIEW Buchungen(Ferienwohnung)\n" +
                     "AS SELECT f.fw_ID\n" +
                     "FROM dbsys61.Ferienwohnung f,dbsys61.Buchung B\n" +
-                    "WHERE b.buchung_Von > TO_DATE('"+ anreisetermin + "', 'MM/DD/YYYY')\n" +
-                    "AND b.buchung_Von < TO_DATE('"+ abreisetermin + "', 'MM/DD/YYYY')\n" +
-                    "AND b.buchung_Bis > TO_DATE('"+ anreisetermin + "', 'MM/DD/YYYY')\n" +
-                    "AND b.buchung_Bis < TO_DATE('"+ abreisetermin + "', 'MM/DD/YYYY')\n" +
+                    "WHERE b.buchung_Von >= TO_DATE('"+ anreisetermin + "', 'MM/DD/YYYY')\n" +
+                    "AND b.buchung_Von <= TO_DATE('"+ abreisetermin + "', 'MM/DD/YYYY')\n" +
+                    "AND b.buchung_Bis >= TO_DATE('"+ anreisetermin + "', 'MM/DD/YYYY')\n" +
+                    "AND b.buchung_Bis <= TO_DATE('"+ abreisetermin + "', 'MM/DD/YYYY')\n" +
                     "AND f.fw_ID = b.fw_ID\n";
+            stmt2.executeQuery(mySelectQuery);
+            mySelectQuery = "SELECT * FROM Buchungen";
             rset = stmt2.executeQuery(mySelectQuery);
             while (rset.next()) {
-                if (rset.getInt("Ferienwohnung") == ferienwohnungID) {
+               // System.out.println(rset.getInt("Ferienwohnung"));
+                if (rset.getInt("Ferienwohnung") == Integer.parseInt(ferienwohnungID)) {
                     System.out.println("Bereits Gebucht!!");
+                    mySelectQuery = "DROP VIEW Buchungen";
+                    stmt2.executeQuery(mySelectQuery);
                     try {
                         conn.rollback();														// Rollback durchführen
                     } catch (SQLException e) {
@@ -67,26 +76,39 @@ public class Teil4Aufgabe2 {
                 }
             }
 
-            mySelectQuery = "DROP VIEW Buchungen";
-            stmt2.executeQuery(mySelectQuery);
-            /*mySelectQuery = "SELECT COUNT(*) AS Number FROM Buchung";
+            mySelectQuery = "SELECT COUNT(*) AS NumberTest FROM Buchung";
             ResultSet test = stmt.executeQuery(mySelectQuery);
             int test2 = 0;
             while (test.next()) {
-                test2 = test.getInt("Number");
+                test2 = test.getInt("NumberTest");
             }
-            String myUpdateQuery = "INSERT INTO Buchung VALUES(" + test2 + "," + "CURRENT_DATE," +
+            mySelectQuery = "INSERT INTO Buchung VALUES(" + test2 + "," + "CURRENT_DATE," +
                     " TO_DATE('" + anreisetermin + "', 'MM/DD/YYYY')," +
-                    " TO_DATE('" + abreisetermin + "', 'MM/DD/YYYY'), 0, CURRENT_DATE, " + test2 + ", 500, CURRENT_DATE,'" + kundeEmail + "','"+ ferienwohnungID + "')";
-            stmt1.executeUpdate(myUpdateQuery);
+                    " TO_DATE('" + abreisetermin + "', 'MM/DD/YYYY'), 0, CURRENT_DATE, " + test2
+                    + ", 500, CURRENT_DATE,'" + kundeEmail + "','"+ ferienwohnungID + "')";
+            stmt1.executeQuery(mySelectQuery);
+            mySelectQuery = "SELECT * FROM Buchung B WHERE b.buchung_ID = " + test2;
+            rset2 = stmt1.executeQuery(mySelectQuery);
 
-            while(rset.next()) {
-                System.out.println(rset.getInt("pnr"));
+
+            System.out.println("Buchung wurde gebucht mit folgenden Werten: ");
+            while(rset2.next()) {
+                    System.out.println(rset2.getInt("buchung_ID") + " "
+                            + rset2.getDate("buchung_Datum") + " "
+                            + rset2.getDate("buchung_Von") + " "
+                            + rset2.getDate("buchung_Bis") + " "
+                            + rset2.getInt("buchung_Sterne") + " "
+                            + rset2.getDate("buchung_Bewertungsdatum") + " "
+                            + rset2.getInt("buchung_RechnungNR") + " "
+                            + rset2.getInt("buchung_RechnungsBetrag")
+                            + rset2.getDate("buchung_RechnungsDatum") + " "
+                            + rset2.getString("kunde_mail") + " "
+                            + rset2.getInt("fw_ID") + " ");
             }
 
-           /* myUpdateQuery = "DELETE FROM pers WHERE pnr = '124'";
-            stmt.executeUpdate(myUpdateQuery);											// Mitarbeiter wieder löschen
-            */
+            mySelectQuery = "DROP VIEW Buchungen";
+            stmt2.executeQuery(mySelectQuery);
+
             stmt.close();																// Verbindung trennen
             conn.commit();
             conn.close();
