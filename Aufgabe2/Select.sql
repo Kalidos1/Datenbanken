@@ -73,6 +73,8 @@ ON f.fw_ID = h.fw_ID
 AND h.austattung_name = 'Sauna'
 AND f.land_name = 'Spain';
 
+SELECT * FROM FerienwohnungSpanien;
+
 CREATE VIEW Buchungen(Ferienwohnung)
 AS SELECT f.fw_name
 FROM dbsys61.Ferienwohnung f,dbsys61.Buchung B,FerienwohnungSpanien FS
@@ -83,16 +85,23 @@ AND b.buchung_Bis <= TO_DATE('11/21/2018', 'MM/DD/YYYY')
 AND f.fw_name = FS.ferienwohnung
 AND f.fw_ID = b.fw_ID;
 
+SELECT * FROM Buchungen;
+
 CREATE VIEW Sterne(Sterne,Ferienwohnung) AS
-SELECT AVG(b.buchung_sterne) as Sterne,FS.ferienwohnung
-FROM dbsys61.Buchung B,FerienwohnungSpanien FS RIGHT OUTER JOIN dbsys61.Ferienwohnung F
-ON f.fw_name = fs.ferienwohnung
-WHERE fs.ferienwohnung NOT IN (SELECT * FROM Buchungen VB) 
-AND b.fw_ID = f.fw_ID
-GROUP BY FS.ferienwohnung
+SELECT AVG(b.buchung_sterne) as Sterne,f.fw_name
+FROM dbsys61.Buchung B RIGHT OUTER JOIN dbsys61.Ferienwohnung F
+ON f.fw_name NOT IN (SELECT * FROM Buchungen VB) 
+AND f.fw_ID = b.fw_ID
+GROUP BY f.fw_name
 ORDER BY Sterne DESC;
 
 SELECT * FROM Sterne;
+
+
+SELECT s.sterne,fs.ferienwohnung
+FROM Sterne S JOIN FerienwohnungSpanien FS
+ON fs.ferienwohnung = s.ferienwohnung
+AND fs.ferienwohnung NOT IN (SELECT * FROM Buchungen VB);
 
 DROP VIEW FerienwohnungSpanien;
 DROP VIEW Buchungen;

@@ -4,9 +4,9 @@ import java.sql.*;
 public class Teil4Aufgabe1 {
     public static void main(String args[]) {
 
-        String land = null; // "Spain"
-        String Anreisetermin = null; // "11/01/2018"
-        String Abreisetermin = null; // "11/21/2018"
+        String land = "Spain"; // "Spain"
+        String Anreisetermin = "11/01/2018"; // "11/01/2018"
+        String Abreisetermin = "11/21/2018"; // "11/21/2018"
         String Austattung = null; // "Sauna"
         String name = "dbsys61";
         String passwd = "Schlagzeug1997";
@@ -25,8 +25,13 @@ public class Teil4Aufgabe1 {
             Anreisetermin = in.readLine();
             System.out.println("Abreisetermin(MM/DD/YYYY): ");
             Abreisetermin = in.readLine();
-            System.out.println("Austattung(Optional): ");
+            System.out.println("Austattung(Optional, \"-\" ohne Austattung): ");
             Austattung = in.readLine();
+            if (Austattung.equals("-")) {
+                Austattung = null;
+                System.out.println("Keine Austattung Gewählt");
+            }
+
         } catch (IOException e) {
             System.out.println("Fehler beim Lesen der Eingabe: " + e);
             System.exit(-1);
@@ -68,15 +73,17 @@ public class Teil4Aufgabe1 {
                         "AND f.fw_ID = b.fw_ID\n";
                 stmt2.executeQuery(mySelectQuery);
                 mySelectQuery = "CREATE VIEW Sterne(Sterne,Ferienwohnung) AS\n" +
-                        "SELECT AVG(b.buchung_sterne) as Sterne,FS.ferienwohnung\n" +
-                        "FROM dbsys61.Buchung B,FerienwohnungSpanien FS RIGHT OUTER JOIN dbsys61.Ferienwohnung F\n" +
-                        "ON f.fw_name = fs.ferienwohnung\n" +
-                        "WHERE fs.ferienwohnung NOT IN (SELECT * FROM Buchungen VB) \n" +
+                        "SELECT AVG(b.buchung_sterne) as Sterne,f.fw_name\n" +
+                        "FROM dbsys61.Buchung B RIGHT OUTER JOIN dbsys61.Ferienwohnung F\n" +
+                        "ON f.fw_name NOT IN (SELECT * FROM Buchungen VB)\n" +
                         "AND b.fw_ID = f.fw_ID\n" +
-                        "GROUP BY FS.ferienwohnung\n" +
+                        "GROUP BY f.fw_name\n" +
                         "ORDER BY Sterne DESC";
                 stmt3.executeQuery(mySelectQuery);
-               mySelectQuery = "SELECT * FROM Sterne";
+               mySelectQuery = "SELECT s.sterne,fs.ferienwohnung\n" +
+                       "FROM Sterne S JOIN FerienwohnungSpanien FS\n" +
+                       "ON fs.ferienwohnung = s.ferienwohnung\n" +
+                       "AND fs.ferienwohnung NOT IN (SELECT * FROM Buchungen VB)";
                rset = stmt4.executeQuery(mySelectQuery);
                mySelectQuery = "DROP VIEW FerienwohnungSpanien";
                stmt.executeQuery(mySelectQuery);
@@ -102,15 +109,17 @@ public class Teil4Aufgabe1 {
                         "AND f.fw_ID = b.fw_ID\n";
                 stmt2.executeQuery(mySelectQuery);
                 mySelectQuery = "CREATE VIEW Sterne(Sterne,Ferienwohnung) AS\n" +
-                        "SELECT AVG(b.buchung_sterne) as Sterne,FS.ferienwohnung\n" +
-                        "FROM dbsys61.Buchung B,FerienwohnungSpanien FS RIGHT OUTER JOIN dbsys61.Ferienwohnung F\n" +
-                        "ON f.fw_name = fs.ferienwohnung\n" +
-                        "WHERE fs.ferienwohnung NOT IN (SELECT * FROM Buchungen VB) \n" +
+                        "SELECT AVG(b.buchung_sterne) as Sterne,f.fw_name\n" +
+                        "FROM dbsys61.Buchung B RIGHT OUTER JOIN dbsys61.Ferienwohnung F\n" +
+                        "ON f.fw_name NOT IN (SELECT * FROM Buchungen VB)\n" +
                         "AND b.fw_ID = f.fw_ID\n" +
-                        "GROUP BY FS.ferienwohnung\n" +
+                        "GROUP BY f.fw_name\n" +
                         "ORDER BY Sterne DESC";
                 stmt3.executeQuery(mySelectQuery);
-                mySelectQuery = "SELECT * FROM Sterne";
+                mySelectQuery = "SELECT s.sterne,fs.ferienwohnung\n" +
+                        "FROM Sterne S JOIN FerienwohnungSpanien FS\n" +
+                        "ON fs.ferienwohnung = s.ferienwohnung\n" +
+                        "AND fs.ferienwohnung NOT IN (SELECT * FROM Buchungen VB)";
                 rset = stmt4.executeQuery(mySelectQuery);
                 mySelectQuery = "DROP VIEW FerienwohnungSpanien";
                 stmt.executeQuery(mySelectQuery);

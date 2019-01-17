@@ -102,8 +102,6 @@ INSERT INTO Buchung VALUES (9,TO_DATE('2019/09/01','yyyy/mm/dd'),TO_DATE('2019/0
 TO_DATE('2019/09/06','yyyy/mm/dd'),5,TO_DATE('2019/09/01','yyyy/mm/dd'),3,100,TO_DATE('2019/09/01','yyyy/mm/dd'),'max2@mustermann.de',7);
 INSERT INTO Buchung VALUES (10,TO_DATE('2019/12/10','yyyy/mm/dd'),TO_DATE('2019/12/10','yyyy/mm/dd'),
 TO_DATE('2019/12/17','yyyy/mm/dd'),4,TO_DATE('2019/12/17','yyyy/mm/dd'),0,2000,TO_DATE('2019/12/10','yyyy/mm/dd'),'max@mustermann.de',4);
-INSERT INTO Buchung VALUES (11,TO_DATE('2019/12/10','yyyy/mm/dd'),TO_DATE('2019/12/10','yyyy/mm/dd'),
-TO_DATE('2019/12/17','yyyy/mm/dd'),4,TO_DATE('2019/12/17','yyyy/mm/dd'),0,2000,TO_DATE('2019/12/10','yyyy/mm/dd'),'max@mustermann.de',8);
 /*-----------------Anzahlung--------------------*/
 INSERT INTO Anzahlung VALUES (0,TO_DATE('2019/12/10','yyyy/mm/dd'),300,0);
 INSERT INTO Anzahlung VALUES (1,TO_DATE('2019/06/05','yyyy/mm/dd'),500,1);
